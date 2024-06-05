@@ -19,7 +19,7 @@ public final class WeatherPlugin extends JavaPlugin {
     private Vector windDirection;
     
     @Getter
-    private HashMap<Player, Integer> windTimers;
+    private HashMap<Player, Integer> windTimers = new HashMap<>();
 
     @Override
     public void onEnable() {
