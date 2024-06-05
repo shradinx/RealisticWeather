@@ -1,0 +1,4 @@
+name: WeatherPlugin
+version: '${version}'
+main: me.shradinx.weatherplugin.WeatherPlugin
+api-version: '1.20'
