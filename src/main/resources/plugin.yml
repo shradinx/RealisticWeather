@@ -1,4 +1,4 @@
-name: WeatherPlugin
+name: RealisticWeather
 version: '${version}'
-main: me.shradinx.weatherplugin.WeatherPlugin
+main: me.shradinx.realisticweather.RealisticWeather
 api-version: '1.20'

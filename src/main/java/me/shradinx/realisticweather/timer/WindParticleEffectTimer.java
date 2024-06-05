@@ -1,8 +1,8 @@
-package me.shradinx.weatherplugin.timer;
+package me.shradinx.realisticweather.timer;
 
 import com.destroystokyo.paper.ParticleBuilder;
-import me.shradinx.weatherplugin.WeatherPlugin;
-import me.shradinx.weatherplugin.utils.LocationUtils;
+import me.shradinx.realisticweather.RealisticWeather;
+import me.shradinx.realisticweather.utils.LocationUtils;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Particle;
@@ -23,7 +23,7 @@ public class WindParticleEffectTimer extends BukkitRunnable {
     
     @Override
     public void run() {
-        Vector direction = WeatherPlugin.getPlugin().getWindDirection().clone();
+        Vector direction = RealisticWeather.getPlugin().getWindDirection().clone();
         if (direction.isZero()) return;
         direction = direction.clone().multiply(0.25);
         Location origin = player.getLocation().clone();
@@ -53,7 +53,7 @@ public class WindParticleEffectTimer extends BukkitRunnable {
                         .extra(0)
                         .spawn();
                 }
-            }.runTaskTimer(WeatherPlugin.getPlugin(), 0, 3);
+            }.runTaskTimer(RealisticWeather.getPlugin(), 0, 3);
         }
     }
 }

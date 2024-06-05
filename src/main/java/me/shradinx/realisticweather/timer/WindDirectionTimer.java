@@ -1,6 +1,6 @@
-package me.shradinx.weatherplugin.timer;
+package me.shradinx.realisticweather.timer;
 
-import me.shradinx.weatherplugin.WeatherPlugin;
+import me.shradinx.realisticweather.RealisticWeather;
 import org.bukkit.World;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
@@ -21,6 +21,6 @@ public class WindDirectionTimer extends BukkitRunnable {
         int x = random.nextInt(-1, 2);
         int z = random.nextInt(-1, 2);
         Vector vector = new Vector(x, 0, z);
-        WeatherPlugin.getPlugin().setWindDirection(vector);
+        RealisticWeather.getPlugin().setWindDirection(vector);
     }
 }

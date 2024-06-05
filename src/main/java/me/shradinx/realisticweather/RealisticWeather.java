@@ -1,10 +1,10 @@
-package me.shradinx.weatherplugin;
+package me.shradinx.realisticweather;
 
 import lombok.Getter;
 import lombok.Setter;
-import me.shradinx.weatherplugin.listener.PlayerJoinListener;
-import me.shradinx.weatherplugin.listener.PlayerQuitListener;
-import me.shradinx.weatherplugin.timer.WindDirectionTimer;
+import me.shradinx.realisticweather.listener.PlayerJoinListener;
+import me.shradinx.realisticweather.listener.PlayerQuitListener;
+import me.shradinx.realisticweather.timer.WindDirectionTimer;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -12,10 +12,10 @@ import org.bukkit.util.Vector;
 
 import java.util.HashMap;
 
-public final class WeatherPlugin extends JavaPlugin {
+public final class RealisticWeather extends JavaPlugin {
     
     @Getter
-    private static WeatherPlugin plugin;
+    private static RealisticWeather plugin;
     
     @Getter
     @Setter

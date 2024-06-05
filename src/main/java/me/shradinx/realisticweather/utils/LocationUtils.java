@@ -1,4 +1,4 @@
-package me.shradinx.weatherplugin.utils;
+package me.shradinx.realisticweather.utils;
 
 import org.bukkit.Location;
 

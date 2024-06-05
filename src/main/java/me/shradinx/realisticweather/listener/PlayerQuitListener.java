@@ -1,6 +1,6 @@
-package me.shradinx.weatherplugin.listener;
+package me.shradinx.realisticweather.listener;
 
-import me.shradinx.weatherplugin.WeatherPlugin;
+import me.shradinx.realisticweather.RealisticWeather;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -8,9 +8,9 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 public class PlayerQuitListener implements Listener {
     
-    private final WeatherPlugin plugin;
+    private final RealisticWeather plugin;
     
-    public PlayerQuitListener(WeatherPlugin plugin) {
+    public PlayerQuitListener(RealisticWeather plugin) {
         this.plugin = plugin;
     }
     

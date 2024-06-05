@@ -1,7 +1,7 @@
-package me.shradinx.weatherplugin.listener;
+package me.shradinx.realisticweather.listener;
 
-import me.shradinx.weatherplugin.WeatherPlugin;
-import me.shradinx.weatherplugin.timer.WindParticleEffectTimer;
+import me.shradinx.realisticweather.RealisticWeather;
+import me.shradinx.realisticweather.timer.WindParticleEffectTimer;
 import org.bukkit.Particle;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -11,9 +11,9 @@ import org.bukkit.scheduler.BukkitTask;
 
 public class PlayerJoinListener implements Listener {
     
-    private final WeatherPlugin plugin;
+    private final RealisticWeather plugin;
     
-    public PlayerJoinListener(WeatherPlugin plugin) {
+    public PlayerJoinListener(RealisticWeather plugin) {
         this.plugin = plugin;
     }
     
