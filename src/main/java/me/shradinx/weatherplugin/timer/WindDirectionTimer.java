@@ -17,7 +17,7 @@ public class WindDirectionTimer extends BukkitRunnable {
     
     @Override
     public void run() {
-        if (world.getTime() != 6000L) return;
+        if (world.getTime() < 6000L || world.getTime() >= 6010L) return;
         int x = random.nextInt(-1, 2);
         int z = random.nextInt(-1, 2);
         Vector vector = new Vector(x, 0, z);
