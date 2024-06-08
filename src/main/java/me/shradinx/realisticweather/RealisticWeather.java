@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import me.shradinx.realisticweather.listener.PlayerJoinListener;
 import me.shradinx.realisticweather.listener.PlayerQuitListener;
+import me.shradinx.realisticweather.listener.ProjectileListener;
 import me.shradinx.realisticweather.timer.WindDirectionTimer;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -35,14 +36,18 @@ public final class RealisticWeather extends JavaPlugin {
         
         // Register event listeners
         Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(this), this);
+        getLogger().info("-- Player Join Listener Registered! -- ");
         Bukkit.getPluginManager().registerEvents(new PlayerQuitListener(this), this);
+        getLogger().info("-- Player Quit Listener Registered! -- ");
+        Bukkit.getPluginManager().registerEvents(new ProjectileListener(this), this);
+        getLogger().info("-- Projectile Listener Registered! -- ");
         
-        getLogger().info("WeatherPlugin Enabled!");
+        getLogger().info("RealisticWeather Enabled!");
     }
 
     @Override
     public void onDisable() {
         // Plugin shutdown logic
-        getLogger().info("WeatherPlugin Disabled!");
+        getLogger().info("RealisticWeather Disabled!");
     }
 }
