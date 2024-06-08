@@ -34,7 +34,7 @@ public class WindParticleEffectTimer extends BukkitRunnable {
                 double counter = 0;
                 @Override
                 public void run() {
-                    if (counter > 60) {
+                    if (counter > 200) {
                         this.cancel();
                         return;
                     }
@@ -53,7 +53,7 @@ public class WindParticleEffectTimer extends BukkitRunnable {
                         .extra(0)
                         .spawn();
                 }
-            }.runTaskTimer(RealisticWeather.getPlugin(), 0, 3);
+            }.runTaskTimer(RealisticWeather.getPlugin(), 0, 5);
         }
     }
 }
