@@ -2,6 +2,7 @@ package me.shradinx.realisticweather;
 
 import lombok.Getter;
 import lombok.Setter;
+import me.shradinx.realisticweather.commands.ReloadCommand;
 import me.shradinx.realisticweather.listener.PlayerJoinListener;
 import me.shradinx.realisticweather.listener.PlayerQuitListener;
 import me.shradinx.realisticweather.listener.ProjectileListener;

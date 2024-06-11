@@ -1,5 +1,6 @@
-package me.shradinx.realisticweather;
+package me.shradinx.realisticweather.commands;
 
+import me.shradinx.realisticweather.RealisticWeather;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.command.Command;
