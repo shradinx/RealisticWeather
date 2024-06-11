@@ -46,11 +46,6 @@ public class VehicleListener implements Listener {
         Vector windDirection = plugin.getWindDirection();
         if (windDirection.isZero()) return;
         
-        /*
-        plugin.getLogger().info("Player Direction: " + direction);
-        plugin.getLogger().info("Wind Direction: " + windDirection);
-         */
-        
         double dot = direction.dot(windDirection);
         double angle = direction.angle(windDirection) * 180.0f / Math.PI;
         if (dot > 0) {
