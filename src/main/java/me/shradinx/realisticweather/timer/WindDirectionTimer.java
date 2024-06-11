@@ -18,7 +18,7 @@ public class WindDirectionTimer extends BukkitRunnable {
     
     @Override
     public void run() {
-        if (world.getTime() < 6000L || world.getTime() >= 6010L) return;
+        if (world.getTime() < 1000L || world.getTime() >= 1020L) return;
         int x = random.nextInt(-1, 2);
         int z = random.nextInt(-1, 2);
         if (!plugin.getConfig().getBoolean("wind-enabled")) {
