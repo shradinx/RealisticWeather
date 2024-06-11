@@ -16,17 +16,11 @@ import org.bukkit.util.Vector;
 public class WindParticleEffectTimer extends BukkitRunnable {
     
     private final Player player;
-    private final Particle particle;
     private Color color = null;
     private ItemStack stack = null;
     
-    public WindParticleEffectTimer(Player player, Particle particle) {
+    public WindParticleEffectTimer(Player player) {
         this.player = player;
-        this.particle = particle;
-        switch (particle) {
-            case ENTITY_EFFECT -> color = Color.fromRGB(245, 245, 245);
-            case ITEM -> stack = new ItemStack(Material.SAND);
-        }
     }
     
     @Override
@@ -36,6 +30,18 @@ public class WindParticleEffectTimer extends BukkitRunnable {
         direction = direction.clone().multiply(0.25);
         Location origin = player.getLocation().clone();
         
+        Particle particle = switch (player.getLocation().getBlock().getBiome()) {
+            case TAIGA, SNOWY_PLAINS, SNOWY_TAIGA, SNOWY_SLOPES,
+                SNOWY_BEACH, ICE_SPIKES, FROZEN_OCEAN, FROZEN_PEAKS,
+                FROZEN_RIVER, DEEP_FROZEN_OCEAN -> Particle.SNOWFLAKE;
+            case DESERT -> Particle.ITEM;
+            default -> Particle.ENTITY_EFFECT;
+        };
+        
+        switch (particle) {
+            case ENTITY_EFFECT -> color = Color.fromRGB(245, 245, 245);
+            case ITEM -> stack = new ItemStack(Material.SAND);
+        }
         for (int i = 0; i < 10; i++) {
             Location randomLoc = LocationUtils.getRandomLocation(origin, 30);
             Vector finalDirection = direction;
@@ -72,7 +78,7 @@ public class WindParticleEffectTimer extends BukkitRunnable {
                     
                     builder.spawn();
                 }
-            }.runTaskTimer(RealisticWeather.getPlugin(), 0, 2);
+            }.runTaskTimer(RealisticWeather.getPlugin(), 5, 2);
         }
     }
 }
