@@ -13,6 +13,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 public final class RealisticWeather extends JavaPlugin {
     
@@ -28,7 +29,10 @@ public final class RealisticWeather extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        // Plugin startup logic
+        // Save default config
+        saveDefaultConfig();
+        
+        // Init plugin instance variable
         plugin = this;
         
         // Register wind direction timer
@@ -45,12 +49,14 @@ public final class RealisticWeather extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new VehicleListener(this), this);
         getLogger().info("-- Vehicle Listener Registered! -- ");
         
+        // Register commands
+        Objects.requireNonNull(getCommand("weatherreload")).setExecutor(new ReloadCommand(this));
+        
         getLogger().info("RealisticWeather Enabled!");
     }
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
         getLogger().info("RealisticWeather Disabled!");
     }
 }

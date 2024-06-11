@@ -2,3 +2,16 @@ name: RealisticWeather
 version: '${version}'
 main: me.shradinx.realisticweather.RealisticWeather
 api-version: '1.20'
+commands:
+  weatherreload:
+    description: Reloads the plugin's config.yml
+    aliases:
+      - rwreload
+    permission: realisticweather.admin.reload
+    permission-message: You do not have permission to use this command.
+permissions:
+  realisticweather.admin:
+    description: Allows you to use admin commands
+    default: op
+    children:
+      realisticweather.admin.reload: true
