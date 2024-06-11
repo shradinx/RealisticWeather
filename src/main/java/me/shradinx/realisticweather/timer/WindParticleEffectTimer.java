@@ -17,7 +17,7 @@ public class WindParticleEffectTimer extends BukkitRunnable {
     
     private final Player player;
     private Color color = null;
-    private ItemStack stack = null;
+    private Particle.DustOptions options = null;
     
     private final RealisticWeather plugin = RealisticWeather.getPlugin();
     
@@ -32,17 +32,17 @@ public class WindParticleEffectTimer extends BukkitRunnable {
         direction = direction.clone().multiply(0.25);
         Location origin = player.getLocation().clone();
         
-        Particle particle = switch (player.getLocation().getBlock().getBiome()) {
+        Particle particle = switch (player.getWorld().getBiome(player.getLocation())) {
             case TAIGA, SNOWY_PLAINS, SNOWY_TAIGA, SNOWY_SLOPES,
                 SNOWY_BEACH, ICE_SPIKES, FROZEN_OCEAN, FROZEN_PEAKS,
                 FROZEN_RIVER, DEEP_FROZEN_OCEAN -> Particle.SNOWFLAKE;
-            case DESERT -> Particle.ITEM;
+            case DESERT, BADLANDS, ERODED_BADLANDS, WOODED_BADLANDS -> Particle.DUST;
             default -> Particle.ENTITY_EFFECT;
         };
         
         switch (particle) {
             case ENTITY_EFFECT -> color = Color.fromRGB(245, 245, 245);
-            case ITEM -> stack = new ItemStack(Material.SAND);
+            case DUST -> options = new Particle.DustOptions(Color.fromRGB(237, 237, 164), 1.5f);
         }
         for (int i = 0; i < 10; i++) {
             Location randomLoc = LocationUtils.getRandomLocation(origin, 30);
@@ -79,8 +79,8 @@ public class WindParticleEffectTimer extends BukkitRunnable {
                     
                     if (particle.equals(Particle.ENTITY_EFFECT)) {
                         builder.data(color);
-                    } else if (particle.equals(Particle.ITEM)) {
-                        builder.data(stack);
+                    } else if (particle.equals(Particle.DUST)) {
+                        builder.data(options);
                     }
                     
                     builder.spawn();
