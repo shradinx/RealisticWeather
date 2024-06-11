@@ -19,6 +19,8 @@ public class WindParticleEffectTimer extends BukkitRunnable {
     private Color color = null;
     private ItemStack stack = null;
     
+    private final RealisticWeather plugin = RealisticWeather.getPlugin();
+    
     public WindParticleEffectTimer(Player player) {
         this.player = player;
     }
@@ -55,6 +57,11 @@ public class WindParticleEffectTimer extends BukkitRunnable {
                         return;
                     }
                     counter++;
+                    
+                    if (!plugin.getConfig().getBoolean("wind-enabled")) {
+                        this.cancel();
+                        return;
+                    }
                     
                     Location newLoc = randomLoc.add(finalDirection);
                     Block block = newLoc.getBlock();

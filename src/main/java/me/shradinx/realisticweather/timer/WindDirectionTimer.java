@@ -10,6 +10,7 @@ import java.util.Random;
 public class WindDirectionTimer extends BukkitRunnable {
     private final World world;
     private final Random random = new Random();
+    private final RealisticWeather plugin = RealisticWeather.getPlugin();
     
     public WindDirectionTimer(World world) {
         this.world = world;
@@ -20,6 +21,10 @@ public class WindDirectionTimer extends BukkitRunnable {
         if (world.getTime() < 6000L || world.getTime() >= 6010L) return;
         int x = random.nextInt(-1, 2);
         int z = random.nextInt(-1, 2);
+        if (!plugin.getConfig().getBoolean("wind-enabled")) {
+            this.cancel();
+            return;
+        }
         Vector vector = new Vector(x, 0, z);
         RealisticWeather.getPlugin().setWindDirection(vector);
     }

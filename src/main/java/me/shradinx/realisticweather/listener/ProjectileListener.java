@@ -20,6 +20,8 @@ public class ProjectileListener implements Listener {
     @EventHandler
     public void onProjectileLaunch(ProjectileLaunchEvent event) {
         if (event.isCancelled()) return;
+        if (!plugin.getConfig().getBoolean("wind-enabled")) return;
+        if (!plugin.getConfig().getBoolean("wind-affect-projectiles")) return;
         Projectile projectile = event.getEntity();
         
         Vector direction = projectile.getVelocity();
