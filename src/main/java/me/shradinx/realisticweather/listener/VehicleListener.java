@@ -48,11 +48,15 @@ public class VehicleListener implements Listener {
         
         double dot = direction.dot(windDirection);
         double angle = direction.angle(windDirection) * 180.0f / Math.PI;
+        
         if (dot > 0) {
-            vehicle.setVelocity(direction.midpoint(windDirection).normalize().multiply(0.4));
+            if (angle >= 45) {
+                vehicle.setVelocity(direction.midpoint(windDirection).normalize().multiply(0.4));
+            }
             return;
         }
-        int divisor = 100;
+        
+        int divisor = 200;
         int pushDirection = 1;
         double multiplier;
         
@@ -61,17 +65,27 @@ public class VehicleListener implements Listener {
                 return;
             }
             pushDirection = -1;
-            divisor = Math.round((float) Math.clamp((100 - angle) * 20, 300, 700));
+            divisor = Math.round((float) Math.clamp((180 - angle) * 20, 300, 700));
         }
-        multiplier = Math.clamp(angle / divisor, 0.01, 0.4);
+        
+        multiplier = Math.clamp(angle / divisor, 0.005, 0.75);
+        
         if (multiplier < 0 && dot <= 0) {
             multiplier *= pushDirection;
         }
-        Vector vector = direction.midpoint(windDirection)
-            .multiply(multiplier);
+        
+        Vector vector;
+        if (multiplier >= 0.45) {
+            vector = direction.clone().normalize().multiply((1 - multiplier) / 2);
+        } else {
+            vector = direction.midpoint(windDirection)
+                .multiply(multiplier);
+        }
+        
         if (((Boat) vehicle).getStatus().equals(Boat.Status.IN_WATER)) {
             vector.setY(0);
         }
+        
         vehicle.setVelocity(vector);
     }
 }
