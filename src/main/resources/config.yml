@@ -1,0 +1,8 @@
+# Should realistic wind be enabled
+wind-enabled: true
+
+# Should wind affect a projectile's trajectory
+wind-affect-projectiles: true
+
+# Should wind affect a boat's direction and speed
+wind-affect-boats: true
