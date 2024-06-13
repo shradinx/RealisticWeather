@@ -44,15 +44,16 @@ public class WindParticleEffectTimer extends BukkitRunnable {
             case ENTITY_EFFECT -> color = Color.fromRGB(245, 245, 245);
             case DUST -> options = new Particle.DustOptions(Color.fromRGB(237, 237, 164), 1.5f);
         }
-        for (int i = 0; i < 10; i++) {
-            Location randomLoc = LocationUtils.getRandomLocation(origin, 30);
+        for (int i = 0; i < 15; i++) {
+            Location randomLoc = LocationUtils.getRandomLocation(origin, 50);
             Vector finalDirection = direction;
             
             new BukkitRunnable() {
                 double counter = 0;
+                double deltaOffset = 0.4;
                 @Override
                 public void run() {
-                    if (counter > 400) {
+                    if (counter > 40) {
                         this.cancel();
                         return;
                     }
@@ -74,6 +75,7 @@ public class WindParticleEffectTimer extends BukkitRunnable {
                     ParticleBuilder builder = new ParticleBuilder(particle)
                         .location(newLoc)
                         .count(10)
+                        .offset(deltaOffset, deltaOffset, deltaOffset)
                         .receivers(player)
                         .extra(0);
                     
@@ -84,8 +86,9 @@ public class WindParticleEffectTimer extends BukkitRunnable {
                     }
                     
                     builder.spawn();
+                    deltaOffset -= 0.01;
                 }
-            }.runTaskTimer(RealisticWeather.getPlugin(), 5, 2);
+            }.runTaskTimer(RealisticWeather.getPlugin(), 10, 1);
         }
     }
 }
