@@ -23,7 +23,7 @@ public class PlayerJoinListener implements Listener {
         if (!plugin.getConfig().getBoolean("wind-enabled")) return;
         
         BukkitTask task = new WindParticleEffectTimer(player)
-            .runTaskTimer(plugin, 5, 200);
+            .runTaskTimer(plugin, 5, 40);
         plugin.getWindTimers().put(player, task.getTaskId());
     }
 }
