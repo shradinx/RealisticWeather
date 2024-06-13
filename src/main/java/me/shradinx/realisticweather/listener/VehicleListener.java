@@ -38,8 +38,6 @@ public class VehicleListener implements Listener {
             return;
         }
         
-        
-        
         Vector direction = vehicle.getLocation().getDirection();
         if (direction.isZero()) return;
         Vector windDirection = plugin.getWindDirection();
