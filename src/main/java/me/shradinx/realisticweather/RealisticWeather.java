@@ -2,7 +2,8 @@ package me.shradinx.realisticweather;
 
 import lombok.Getter;
 import lombok.Setter;
-import me.shradinx.realisticweather.commands.ReloadCommand;
+import me.shradinx.realisticweather.commands.MainCommand;
+import me.shradinx.realisticweather.commands.ToggleCommand;
 import me.shradinx.realisticweather.listener.PlayerJoinListener;
 import me.shradinx.realisticweather.listener.PlayerQuitListener;
 import me.shradinx.realisticweather.listener.ProjectileListener;
@@ -51,7 +52,8 @@ public final class RealisticWeather extends JavaPlugin {
         getLogger().info("-- Vehicle Listener Registered! -- ");
         
         // Register commands
-        Objects.requireNonNull(getCommand("weatherreload")).setExecutor(new ReloadCommand(this));
+        Objects.requireNonNull(getCommand("realisticweather")).setExecutor(new MainCommand(this));
+        Objects.requireNonNull(getCommand("togglerw")).setExecutor(new ToggleCommand(this));
         
         getLogger().info("RealisticWeather Enabled!");
     }

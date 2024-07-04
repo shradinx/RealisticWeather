@@ -3,11 +3,18 @@ version: '${version}'
 main: me.shradinx.realisticweather.RealisticWeather
 api-version: '1.20'
 commands:
-  weatherreload:
-    description: Reloads the plugin's config.yml
+  realisticweather:
+    description: Main command
     aliases:
-      - rwreload
-    permission: realisticweather.admin.reload
+      - rw
+      - rweather
+    permission: realisticweather.default
+    permission-message: You do not have permission to use this command.
+  togglerw:
+    description: Toggle realistic weather command
+    aliases:
+      - togglerealisticweather
+    permission: realisticweather.admin.toggle
     permission-message: You do not have permission to use this command.
 permissions:
   realisticweather.admin:
@@ -15,3 +22,5 @@ permissions:
     default: op
     children:
       realisticweather.admin.reload: true
+      realisticweather.admin.toggle: true
+      realisticweather.admin.tornado: true
