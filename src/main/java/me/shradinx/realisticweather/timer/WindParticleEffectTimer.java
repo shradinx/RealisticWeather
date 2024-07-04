@@ -31,6 +31,9 @@ public class WindParticleEffectTimer extends BukkitRunnable {
         if (direction.isZero()) return;
         direction = direction.clone().multiply(0.25);
         Location origin = player.getLocation().clone();
+        if (origin.getBlock().getLightFromSky() <= 4) {
+            return;
+        }
         
         Particle particle = switch (player.getWorld().getBiome(player.getLocation())) {
             case TAIGA, SNOWY_PLAINS, SNOWY_TAIGA, SNOWY_SLOPES,
