@@ -38,10 +38,11 @@ public class TornadoCommand extends SubCommand {
     @Override
     public void run(CommandSender sender, String[] args) {
         if (!(sender instanceof Player player)) {
-            plugin.getLogger().info("You must be a player to run this command.");
+            sender.sendMessage("You must be a player to run this command.");
             return;
         }
-        Location loc = player.getLocation().clone();
+        Location loc = player.getLocation().clone().add(15, 1, 0);
+        Location origin = loc.clone();
         
         /*
         World world = player.getWorld();
@@ -54,6 +55,7 @@ public class TornadoCommand extends SubCommand {
         final double[] angle = {15};
         double theta = (angle[0] * Math.PI) / 180f;
           */
+        player.setGravity(false);
         new BukkitRunnable() {
             
             double counter = 0;
@@ -61,10 +63,17 @@ public class TornadoCommand extends SubCommand {
             @Override
             public void run() {
                 if (counter > 20) {
+                    player.setGravity(true);
                     this.cancel();
                     return;
                 }
+                final boolean[] shouldBreak = {false};
                 for (int count = 0; count < 50; count++) {
+                    if (shouldBreak[0]) {
+                        player.setGravity(true);
+                        this.cancel();
+                        return;
+                    }
                     double direction;
                     if (count % 2 == 0) {
                         direction = 1;
@@ -76,18 +85,23 @@ public class TornadoCommand extends SubCommand {
                         double time = 0;
                         double radius = 3;
                         double radIncrementor = 0.01;
-                        final double heightMultiplier = 2.5;
                         double offset = 0.25;
                         double angle = 20;
                         final double angleIncrementor = 10;
                         public void run() {
-                            time += (Math.PI / 20);
+                            time += (Math.PI / 16);
                             double x = (radius * (Math.cos(time)) * direction);
-                            double y = time * heightMultiplier + 0.01;
+                            double y = loc.getY() + 0.25;
                             double z = (radius * (Math.sin(time) * direction));
                             Vector vector = new Vector(x, y, z);
                             vector.rotateAroundY(angle);
                             loc.add(vector);
+                            origin.setY(loc.getY());
+                            Vector distance = player.getLocation().clone().subtract(origin.clone()).toVector();
+                            if (distance.length() < 50) {
+                                player.setVelocity(distance.clone().normalize()
+                                    .multiply(-1 * Math.clamp((1 / distance.length()), 0.15, 0.75)));
+                            }
                             
                             new ParticleBuilder(Particle.ENTITY_EFFECT)
                                 .location(loc)
@@ -104,15 +118,17 @@ public class TornadoCommand extends SubCommand {
                             offset += 0.0025;
                             angle += angleIncrementor;
                             
-                            if (time > Math.PI * 40 || loc.getY() >= 250) {
+                            if (time > Math.PI * 20 || loc.getY() >= 250) {
+                                player.setGravity(true);
                                 this.cancel();
+                                shouldBreak[0] = true;
                             }
                         }
                     }.runTaskTimer(plugin, 0, 0);
                 }
                 counter++;
             }
-        }.runTaskTimer(plugin, 10, 10);
+        }.runTaskTimer(plugin, 0, 10);
         
         // block.setType(Material.AIR);
     }
