@@ -8,7 +8,7 @@ commands:
     aliases:
       - rw
       - rweather
-    permission: realisticweather.default
+    permission: realisticweather.command.default
     permission-message: You do not have permission to use this command.
   togglerw:
     description: Toggle realistic weather command
@@ -17,6 +17,12 @@ commands:
     permission: realisticweather.admin.toggle
     permission-message: You do not have permission to use this command.
 permissions:
+  realisticweather.command:
+    description: Allows you to use RealisticWeather commands
+    default: true
+    children:
+      realisticweather.command.default: true
+      realisticweather.command.getanemometer: true
   realisticweather.admin:
     description: Allows you to use admin commands
     default: op
@@ -24,3 +30,4 @@ permissions:
       realisticweather.admin.reload: true
       realisticweather.admin.toggle: true
       realisticweather.admin.tornado: true
+      realisticweather.admin.resetgravity: true
