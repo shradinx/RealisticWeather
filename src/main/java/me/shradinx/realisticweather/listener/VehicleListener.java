@@ -54,7 +54,7 @@ public class VehicleListener implements Listener {
         } else {
             multiplier = Math.clamp((((angle / (180 - angle)) / (180 / angle)) / 20), 0.05, 0.1);
             if (angle > 170) {
-                vector = direction.clone().normalize().multiply((multiplier / 2) * -1);
+                vector = direction.clone().normalize().multiply(multiplier);
             } else {
                 Vector midpoint = direction.clone().normalize().midpoint(windDirection);
                 vector = direction.clone().normalize().midpoint(midpoint).multiply(multiplier);

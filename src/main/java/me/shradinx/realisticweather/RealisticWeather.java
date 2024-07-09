@@ -4,14 +4,12 @@ import lombok.Getter;
 import lombok.Setter;
 import me.shradinx.realisticweather.commands.MainCommand;
 import me.shradinx.realisticweather.commands.ToggleCommand;
-import me.shradinx.realisticweather.listener.PlayerJoinListener;
-import me.shradinx.realisticweather.listener.PlayerQuitListener;
-import me.shradinx.realisticweather.listener.ProjectileListener;
-import me.shradinx.realisticweather.listener.VehicleListener;
+import me.shradinx.realisticweather.listener.*;
 import me.shradinx.realisticweather.timer.WindDirectionTimer;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 import java.util.HashMap;
@@ -28,6 +26,9 @@ public final class RealisticWeather extends JavaPlugin {
     
     @Getter
     private HashMap<Player, Integer> windTimers = new HashMap<>();
+    
+    @Getter
+    private HashMap<Player, AnemometerListener.AnemometerFunctionality> anemometers = new HashMap<>();
 
     @Override
     public void onEnable() {
@@ -46,8 +47,10 @@ public final class RealisticWeather extends JavaPlugin {
         getLogger().info("-- Player Join Listener Registered! -- ");
         Bukkit.getPluginManager().registerEvents(new PlayerQuitListener(this), this);
         getLogger().info("-- Player Quit Listener Registered! -- ");
-        Bukkit.getPluginManager().registerEvents(new ProjectileListener(this), this);
-        getLogger().info("-- Projectile Listener Registered! -- ");
+        Bukkit.getPluginManager().registerEvents(new ThrowableListener(this), this);
+        getLogger().info("-- Throwable Listener Registered! -- ");
+        Bukkit.getPluginManager().registerEvents(new AnemometerListener(this), this);
+        getLogger().info("-- Anemometer Listener Registered! -- ");
         Bukkit.getPluginManager().registerEvents(new VehicleListener(this), this);
         getLogger().info("-- Vehicle Listener Registered! -- ");
         

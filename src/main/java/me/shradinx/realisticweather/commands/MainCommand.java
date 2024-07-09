@@ -3,13 +3,10 @@ package me.shradinx.realisticweather.commands;
 import lombok.Getter;
 import lombok.Setter;
 import me.shradinx.realisticweather.RealisticWeather;
-import me.shradinx.realisticweather.commands.subcommands.ReloadCommand;
-import me.shradinx.realisticweather.commands.subcommands.SubCommand;
-import me.shradinx.realisticweather.commands.subcommands.TornadoCommand;
+import me.shradinx.realisticweather.commands.subcommands.*;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
@@ -34,6 +31,8 @@ public class MainCommand implements TabExecutor {
         this.plugin = plugin;
         subCommands.add(new ReloadCommand(plugin));
         subCommands.add(new TornadoCommand(plugin));
+        subCommands.add(new ResetGravityCommand());
+        subCommands.add(new GetAnemometerCommand());
         this.name = "realisticweather";
     }
     
